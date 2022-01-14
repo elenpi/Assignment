@@ -4,24 +4,22 @@ import java.util.List;
 
 public class Report {
 
-    private List<BankAccount> allBankAcounts;
-    //private List<Customer> allCustomers;
+    public static void printCustomers(List<Customer> listCustomers, List<BankAccount> listAccounts) {
 
+        System.out.println("Customers Report:");
+        System.out.println("=================");
 
-    public static void printCustomers(List<Customer> list, List<BankAccount> listAccs) {
-
-
-        for (BankAccount b : listAccs) {
-            List holder = b.getHolders();
+        for (BankAccount account : listAccounts) {
+            List<Customer> holder = account.getHolders();
             int afm = 0;
-            String customer = null;
-            for (Customer s : list) {
-                if (holder.contains(s)) {
-                    customer = s.getCustomerName();
-                    afm = s.getCustomerAFM();
+            String customerName = null;
+            for (Customer customer : listCustomers) {
+                if (holder.contains(customer)) {
+                    customerName = customer.getCustomerName();
+                    afm = customer.getCustomerAFM();
                 }
             }
-            System.out.println("Customer Name: " + customer + ", AFM: " + afm + ", Account: " + b.getAccountNumber());
+            System.out.println("+ Customer Name: " + customerName + ", AFM: " + afm + ", Account: " + account.getAccountNumber());
 
         }
 
@@ -32,6 +30,9 @@ public class Report {
         LocalDate date = null;
         int balance = 0;
         List<String> names = null;
+
+        System.out.println("Bank Accounts Report:");
+        System.out.println("=====================");
 
         for (BankAccount account : list) {
             List holder = account.getHolders();
@@ -44,20 +45,23 @@ public class Report {
             accNumber = account.getAccountNumber();
             date = account.getAccountDate();
             balance = account.getAccountBalance();
+            System.out.println("+ Account Number: " + accNumber + ", Opening Date: " + date + ", Holders: " + names.toString() + ", Current Balance: " + balance);
+
         }
-        System.out.println("Account Number: " + accNumber + ", Opening Date: " + date + ", Holders: " + names.toString() + ", Current Balance: " + balance);
-    };
+    }
 
-    public static void printTransactionsReport(BankAccount account){
+    ;
 
-        String transactionType = null;
-        LocalDate date = null;
-        int accountNumber = 0;
+    public static void printTransactionsReport(BankAccount account) {
 
-        for(Transaction transaction : account.getAccountTransactions()){
-            ;
+        System.out.println("Transactions History Report for the Account " + account.getAccountNumber() + ":");
+        System.out.println("=====================================================");
 
+        for (Transaction transaction : account.getAccountTransactions()) {
+            Customer customer = transaction.getCustomer();
+            String name = customer.getCustomerName();
 
+            System.out.println("+ Transaction Type: " + transaction.getTranscactionType() + " Preformed by: " + name + ", Date: " + transaction.getDate());
         }
     }
 

@@ -1,5 +1,3 @@
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Customer {
@@ -8,7 +6,6 @@ public class Customer {
 
     private String customerName;
     private int customerAFM;
-    private List<Customer> allCustomers;
 
     //===============Constructors===================//
 
@@ -47,18 +44,9 @@ public class Customer {
             System.out.println("Now please enter your AFM:");
             int afm = Integer.valueOf(scanner.nextLine());
 
-
             Customer customer = new Customer(name, afm);
             return customer;
     }
-
-//
-////    Method to add a new customer to the list of all customers
-//    public void addCustomer(Customer customer) {
-//
-//        this.allCustomers.add(customer);
-//
-//    }
 
     @Override
     public String toString() {

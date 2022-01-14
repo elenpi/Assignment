@@ -1,7 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class BankAccount {
 
@@ -15,7 +16,7 @@ public class BankAccount {
 
     //===============Constructors===================//
 
-    public BankAccount(int accountNumber, int accountBalance){
+    public BankAccount(int accountNumber, int accountBalance) {
 
         this.accountNumber = accountNumber;
         this.accountDate = LocalDate.now();
@@ -25,8 +26,8 @@ public class BankAccount {
     }
 
 
-
     //===============Methods===================//
+
 
     // Method to add the date of account's opening
     public LocalDate getAccountDate() {
@@ -39,16 +40,33 @@ public class BankAccount {
         if (this.holders.size() == 2) {
             System.out.println("The account has reached the limit of maximum account holders");
             return;
-
         }
-
         this.holders.add(holder);
     }
 
-    public void getHolderName(Customer holder) {
+    public static BankAccount createAccount(List<Customer> list) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("To open a new account, please enter you name, since you are an existing customer:");
+        String input = scanner.nextLine();
 
 
+        for (Customer customer : list)
+            if (Objects.equals(customer.getCustomerName(), input)) {
+
+                BankAccount account = new BankAccount(1234456, 0);
+
+                System.out.println(input + ", you have successfully opened a new acount " + account.getAccountNumber() + " and your current balance is " + account.getAccountBalance());
+
+                return account;
+            } else {
+                break;
+            }
+        System.out.println("Sorry, you can only open an account if you are an existing customer.");
+        return null;
     }
+
 
     // Method to add a transaction to a list
     public void addTransaction(Transaction transaction) {
@@ -56,7 +74,7 @@ public class BankAccount {
         this.accountTransactions.add(transaction);
     }
 
-    public void addAccount (){
+    public void addAccount() {
 
     }
 
@@ -84,9 +102,6 @@ public class BankAccount {
     public void setAccountBalance(int accountBalance) {
         this.accountBalance = accountBalance;
     }
-
-
-
 
     @Override
     public String toString() {

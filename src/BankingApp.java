@@ -7,94 +7,104 @@ public class BankingApp {
 
         //===============Register a New Customer===================//
 
+        // Create a list for all customers
         List<Customer> allCustomer = new ArrayList<>();
 
-        Customer papadopoulosI = new Customer("Ioannis Papadopoulos", 123456);
+        // Register New Customers
+        Customer newCustomer = Customer.registerCustomer();
 
-        Customer pippaN = new Customer("Nefeli Pippa", 56789);
+        // Existing Customers
+        Customer customer1 = new Customer("John Doe", 10203040);
+        Customer customer2 = new Customer("Jane Smith", 10305070);
 
-         Customer newCustomer = Customer.registerCustomer();
+        // Adding Customers to the list of all Customers
+        allCustomer.add(newCustomer);
+        allCustomer.add(customer1);
+        allCustomer.add(customer2);
 
-         allCustomer.add(newCustomer);
-        allCustomer.add(pippaN);
-        allCustomer.add(papadopoulosI);
-
+        //===============Create Account===================//
 
         System.out.println(" ");
         System.out.println("===============Create Account=================");
         System.out.println(" ");
 
+        // Create a list for all bank accounts
         List<BankAccount> allBankAccounts = new ArrayList<>();
-        List<BankAccount> allTransactions = new ArrayList<>();
 
+        //Create a new bank account
+        BankAccount account1 = new BankAccount(10987654, 100);
+        BankAccount account2 = new BankAccount(20123456, 1000);
+        BankAccount account3 = new BankAccount(30564738, 5000);
+        BankAccount account4 = BankAccount.createAccount(allCustomer);
 
-        BankAccount account1 = new BankAccount(12345,400);
-        account1.addHolder(papadopoulosI);
-        account1.addHolder(pippaN);
+        // Adding existing customers to accounts
+        account1.addHolder(customer1);
+        account1.addHolder(customer2);
+        account2.addHolder(customer2);
+        account3.addHolder(customer1);
+        account4.addHolder(newCustomer);
 
-        BankAccount account3 = new BankAccount(12334567, 1000);
-        account3.addHolder(pippaN);
-        System.out.println(account1.getHolders());
-
+        // Adding account to the list of all accounts
         allBankAccounts.add(account1);
+        allBankAccounts.add(account2);
+        allBankAccounts.add(account3);
+        allBankAccounts.add(account4);
 
-        System.out.println(account1.toString());
+        //Transaction.transactionsMenu(customer2,account1,allBankAccounts);
+
+        //===============Check===================//
+
+        System.out.println("");
+        System.out.println("==============Check==================");
+        System.out.println("");
+
+        Check check1 = Check.draftCheck(newCustomer,account3);
+
+        //===============Withdraw===================//
 
         System.out.println(" ");
         System.out.println("===============Withdraw=================");
         System.out.println(" ");
 
-        Withdrawal.withdraw(account1,100);
-        Withdrawal withdrawal = new Withdrawal(account1);
-        account1.addTransaction(withdrawal);
-        System.out.println(account1.getAccountTransactions());
+        // Make a withdraw
+        Withdrawal withdraw = Withdrawal.withdraw(customer1, account1, 100);
 
-
-
-//        Withdrawal withdrawal = new Withdrawal(account1);
-//        ithdrawal.withdraw(account1, 100);
-//        System.out.println(withdrawal);
-//        account1.addTransaction(withdrawal);
-//        System.out.println(account1.getAccountTransactions());
-//        System.out.println(account1);
-//
-//        Withdrawal withdrawalN = new Withdrawal(account1);
-//        withdrawalN.withdraw(account1, 50);
-//        account1.addTransaction(withdrawalN);
-        System.out.println("");
-        System.out.println("==============Check==================");
-        System.out.println("");
-        //===============Check===================////
-
-        Check check1 = new Check(account1,account1,100,"Nefeli Pippa","Pay rent");
-        System.out.println(check1.toString());
+        //===============Deposit===================//
 
         System.out.println("");
         System.out.println("==============Deposit==================");
         System.out.println("");
 
-        //===============Deposit===================//
-
-
-        Deposit deposit = new Deposit(account1);
-        deposit.deposit(account1, 20);
-        account1.addTransaction(deposit);
+        // Make a deposit
+        Deposit deposit = Deposit.deposit(newCustomer, account1, 100);
 
         //===============Transfer===================//
 
+        System.out.println("");
+        System.out.println("==============Transfer==================");
+        System.out.println("");
 
-//        Transfer transfer = new Transfer(account1);
-//        transfer.transfer(10, account1, account3);
-//        account1.addTransaction(transfer);
-
+        // Make a transfer
+        Transfer transfer = Transfer.transfer(10, customer2, account1, account3);
 
         //===============Reports===================//
 
-        Report.printCustomers(allCustomer,allBankAccounts);
-        Report.printBankAccountReport(allBankAccounts,allCustomer);
+        System.out.println("");
+        System.out.println("==============Reports==================");
+        System.out.println("");
+
+        // Print a report with all registered customers
+        Report.printCustomers(allCustomer, allBankAccounts);
+        System.out.println(" ");
+
+        // Print a report with all accounts
+        Report.printBankAccountReport(allBankAccounts, allCustomer);
+        System.out.println(" ");
+
+        // Print a report with the transaction history of a specific account
+        Report.printTransactionsReport(account1);
 
     }
-
 
 
 }
