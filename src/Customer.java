@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Customer {
 
@@ -18,6 +20,12 @@ public class Customer {
 
     //===============Methods===================//
 
+    //Method to get customer's afm
+    public int getCustomerAFM() {
+        return customerAFM;
+    }
+
+
     //Method to get customer's name
     public String getCustomerName() {
         return customerName;
@@ -29,14 +37,23 @@ public class Customer {
     }
 
     //Method to create a new customer
-    public static Customer createCustomer(String name, int afm) {
+    public static Customer registerCustomer() {
 
-        Customer customer = new Customer(name, afm);
-        return customer;
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("To register as a new customer, please enter your name.");
+            String name = scanner.nextLine();
 
+
+            System.out.println("Now please enter your AFM:");
+            int afm = Integer.valueOf(scanner.nextLine());
+
+
+            Customer customer = new Customer(name, afm);
+            return customer;
     }
 
-    //Method to add a new customer to the list of all customers
+//
+////    Method to add a new customer to the list of all customers
 //    public void addCustomer(Customer customer) {
 //
 //        this.allCustomers.add(customer);
@@ -51,10 +68,5 @@ public class Customer {
                 '}';
     }
 
-    //
-//    public Check draftCheck () {
-//
-//        Check newCheck = new Check()
-//    }
 
 }

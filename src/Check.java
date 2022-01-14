@@ -12,6 +12,7 @@ public class Check {
         this.amount = amount;
         this.recipient = recipient;
         this.description = description;
+
     }
 
     @Override

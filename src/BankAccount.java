@@ -12,7 +12,6 @@ public class BankAccount {
     private List<Customer> holders;
     private int accountBalance;
     private List<Transaction> accountTransactions;
-//    private HashMap<String,int> accountTransactions;
 
     //===============Constructors===================//
 
@@ -25,7 +24,14 @@ public class BankAccount {
         this.holders = new ArrayList<>();
     }
 
+
+
     //===============Methods===================//
+
+    // Method to add the date of account's opening
+    public LocalDate getAccountDate() {
+        return accountDate;
+    }
 
     // Method to add a customer holder to an account
     public void addHolder(Customer holder) {
@@ -39,13 +45,22 @@ public class BankAccount {
         this.holders.add(holder);
     }
 
+    public void getHolderName(Customer holder) {
+
+
+    }
+
     // Method to add a transaction to a list
     public void addTransaction(Transaction transaction) {
 
         this.accountTransactions.add(transaction);
     }
 
-    // Method to add get the account transactions
+    public void addAccount (){
+
+    }
+
+    // Method to get the account transactions
     public List<Transaction> getAccountTransactions() {
         return accountTransactions;
     }

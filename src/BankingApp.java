@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class BankingApp {
 
@@ -6,15 +7,26 @@ public class BankingApp {
 
         //===============Register a New Customer===================//
 
+        List<Customer> allCustomer = new ArrayList<>();
+
         Customer papadopoulosI = new Customer("Ioannis Papadopoulos", 123456);
 
         Customer pippaN = new Customer("Nefeli Pippa", 56789);
 
-        Customer doeJ = Customer.createCustomer("John Doe", 890874);
+         Customer newCustomer = Customer.registerCustomer();
 
-        System.out.println(doeJ.toString());
+         allCustomer.add(newCustomer);
+        allCustomer.add(pippaN);
+        allCustomer.add(papadopoulosI);
 
-        //===============Open a New Bank Account===================//
+
+        System.out.println(" ");
+        System.out.println("===============Create Account=================");
+        System.out.println(" ");
+
+        List<BankAccount> allBankAccounts = new ArrayList<>();
+        List<BankAccount> allTransactions = new ArrayList<>();
+
 
         BankAccount account1 = new BankAccount(12345,400);
         account1.addHolder(papadopoulosI);
@@ -22,54 +34,67 @@ public class BankingApp {
 
         BankAccount account3 = new BankAccount(12334567, 1000);
         account3.addHolder(pippaN);
+        System.out.println(account1.getHolders());
+
+        allBankAccounts.add(account1);
 
         System.out.println(account1.toString());
 
+        System.out.println(" ");
+        System.out.println("===============Withdraw=================");
+        System.out.println(" ");
 
-        //===============Withdraw===================//
-        int amount = 100;
-        Withdrawal withdrawal = new Withdrawal(papadopoulosI);
-        withdrawal.withdraw(account1, amount);
-        System.out.println(withdrawal);
+        Withdrawal.withdraw(account1,100);
+        Withdrawal withdrawal = new Withdrawal(account1);
         account1.addTransaction(withdrawal);
         System.out.println(account1.getAccountTransactions());
-        System.out.println(account1);
-
-        amount = 50;
-        Withdrawal withdrawalN = new Withdrawal(pippaN);
-        withdrawalN.withdraw(account1, amount);
-        account1.addTransaction(withdrawalN);
 
 
-        //===============Withdraw===================//
 
-//        BankAccount account2 = new BankAccount(67891,100122);
+//        Withdrawal withdrawal = new Withdrawal(account1);
+//        ithdrawal.withdraw(account1, 100);
+//        System.out.println(withdrawal);
+//        account1.addTransaction(withdrawal);
+//        System.out.println(account1.getAccountTransactions());
+//        System.out.println(account1);
 //
-//
-//        Check check1 = new Check(account1,account1,100,"Nefeli Pippa","Pay rent");
-//        System.out.println(check1.toString());
+//        Withdrawal withdrawalN = new Withdrawal(account1);
+//        withdrawalN.withdraw(account1, 50);
+//        account1.addTransaction(withdrawalN);
+        System.out.println("");
+        System.out.println("==============Check==================");
+        System.out.println("");
+        //===============Check===================////
+
+        Check check1 = new Check(account1,account1,100,"Nefeli Pippa","Pay rent");
+        System.out.println(check1.toString());
+
+        System.out.println("");
+        System.out.println("==============Deposit==================");
+        System.out.println("");
 
         //===============Deposit===================//
 
-        amount = 20;
-        Deposit deposit = new Deposit(papadopoulosI);
-        deposit.deposit(account1, amount);
+
+        Deposit deposit = new Deposit(account1);
+        deposit.deposit(account1, 20);
         account1.addTransaction(deposit);
 
         //===============Transfer===================//
 
-        amount = 10;
-        Transfer transfer = new Transfer(papadopoulosI);
-        transfer.transfer(amount, account1, account3);
-        account1.addTransaction(transfer);
 
+//        Transfer transfer = new Transfer(account1);
+//        transfer.transfer(10, account1, account3);
+//        account1.addTransaction(transfer);
+
+
+        //===============Reports===================//
+
+        Report.printCustomers(allCustomer,allBankAccounts);
+        Report.printBankAccountReport(allBankAccounts,allCustomer);
 
     }
 
-//    private static void withdraw(Customer customer, BankAccount bankAccount, int amount) {
-//
-//        Withdrawal withdrawal = new Withdrawal(customer);
-//        withdrawal.transaction(bankAccount, amount);
 
 
 }

@@ -2,9 +2,10 @@ import java.time.LocalDate;
 
 public class Transfer extends Transaction {
 
-    public Transfer(Customer customer) {
+    public Transfer(BankAccount account) {
 
-        super(customer);
+        super(account);
+        this.transcactionType = "Deposit";
 
     }
 

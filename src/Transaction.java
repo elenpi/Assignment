@@ -1,13 +1,21 @@
 import java.time.LocalDate;
 
-public class Transaction {
+    public class Transaction {
 
-    protected LocalDate date;
-    protected Customer customer;
+        protected LocalDate date;
+        protected BankAccount account;
+        protected String transcactionType;
 
-    public Transaction(Customer customer) {
+        public Transaction(BankAccount bankAccount) {
 
-        this.customer = customer;
-        this.date = LocalDate.now();
+            this.account = bankAccount;
+            this.date = LocalDate.now();
+            this.transcactionType = transcactionType;
+        }
+
+        public LocalDate getDate() {
+            return date;
+        }
+
     }
-}
+
